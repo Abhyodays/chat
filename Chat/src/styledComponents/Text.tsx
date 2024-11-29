@@ -3,7 +3,7 @@ import { StyleProp, StyleSheet, Text, TextStyle } from "react-native";
 
 type StyledTextProp = {
     children: ReactNode,
-    style?: TextStyle
+    style?: StyleProp<TextStyle>
 }
 export const StyledText = ({ children, style }: StyledTextProp) => {
     return (

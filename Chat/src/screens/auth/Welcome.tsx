@@ -8,6 +8,7 @@ import { StyledText } from "../../styledComponents/Text";
 import GradientButton from "../../components/GradientButton";
 import { io, Socket } from "socket.io-client";
 import { useEffect, useState } from "react";
+import { Colors } from "../styles/colors";
 
 
 const Welcome = () => {
@@ -34,11 +35,10 @@ const Welcome = () => {
     const theme = useTheme();
 
     const handleStarted = () => {
-        console.log("clicked");
-        navigation.navigate('Search')
+        navigation.navigate('Login')
     }
     return (
-        <View style={[CommonStyle.container, styles.dark_bg]}>
+        <View style={CommonStyle.container}>
             <View style={styles.poster}>
                 <Image source={require("../../assets/images/Illustration.png")} resizeMode="contain" style={styles.poster_image} />
             </View>
@@ -47,15 +47,16 @@ const Welcome = () => {
                     Break the boundaries and connect with the people all over the world
                 </StyledText>
             </View>
-            <GradientButton title="Get Started" onPress={handleStarted} />
-            <Button title="Search" onPress={handleStarted} />
+            <View style={styles.button_container}>
+                <GradientButton title="Get Started" onPress={handleStarted} />
+            </View>
         </View>
 
     )
 }
 const styles = StyleSheet.create({
     dark_bg: {
-        backgroundColor: "#000"
+        backgroundColor: Colors.dark.background
     },
     poster_image: {
         height: normalizeVertical(271),
@@ -77,6 +78,10 @@ const styles = StyleSheet.create({
     text_container: {
         alignItems: 'center',
         marginTop: normalizeVertical(60)
+    },
+    button_container: {
+        alignItems: 'center',
+        marginTop: normalizeVertical(50)
     }
 })
 

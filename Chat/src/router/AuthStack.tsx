@@ -5,6 +5,7 @@ import Login from "../screens/auth/Login";
 import Search from "../screens/auth/Search";
 import { User } from "../types/User";
 import Chat from "../screens/auth/Chat";
+import { Colors } from "../screens/styles/colors";
 
 export type AuthStackParamList = {
     Welcome: undefined,
