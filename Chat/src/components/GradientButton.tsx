@@ -1,6 +1,6 @@
 import { View, StyleSheet, ViewStyle, TouchableOpacity } from "react-native"
 import { StyledText } from "../styledComponents/Text"
-import { normalize, normalizeVertical } from "../utilities/responsiveSizing"
+import { normalize, normalizeVertical } from "../utils/responsiveSizing"
 import LinearGradient from "react-native-linear-gradient"
 import { Colors } from "../screens/styles/colors"
 

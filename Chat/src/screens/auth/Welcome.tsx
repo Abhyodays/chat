@@ -3,7 +3,7 @@ import { Button, Image, StyleSheet, Text, View } from "react-native"
 import { AuthStackParamList } from "../../router/AuthStack";
 import { StackNavigationProp } from "@react-navigation/stack";
 import CommonStyle from '../styles/common'
-import { normalize, normalizeVertical } from "../../utilities/responsiveSizing";
+import { normalize, normalizeVertical } from "../../utils/responsiveSizing";
 import { StyledText } from "../../styledComponents/Text";
 import GradientButton from "../../components/GradientButton";
 import { io, Socket } from "socket.io-client";

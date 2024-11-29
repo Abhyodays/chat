@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, ViewStyle } from "react-native"
-import { normalize, normalizeVertical } from "../utilities/responsiveSizing"
+import { normalize, normalizeVertical } from "../utils/responsiveSizing"
 import Icon from 'react-native-vector-icons/AntDesign'
 import { StyledText } from "../styledComponents/Text"
 import { Colors } from "../screens/styles/colors"

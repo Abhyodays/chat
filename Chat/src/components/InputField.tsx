@@ -3,7 +3,7 @@ import { StyleSheet, Text } from "react-native";
 import { View } from "react-native"
 import { TextInput } from "react-native-gesture-handler";
 import Icon from 'react-native-vector-icons/Ionicons'
-import { normalize, normalizeVertical } from "../utilities/responsiveSizing";
+import { normalize, normalizeVertical } from "../utils/responsiveSizing";
 import { Colors } from "../screens/styles/colors";
 
 

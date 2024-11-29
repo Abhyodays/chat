@@ -7,7 +7,7 @@ import StackHeader from "../../components/StackHeader";
 import InputField from "../../components/InputField";
 import { useState } from "react";
 import GradientButton from "../../components/GradientButton";
-import { normalizeVertical } from "../../utilities/responsiveSizing";
+import { normalizeVertical } from "../../utils/responsiveSizing";
 import { StyledText } from "../../styledComponents/Text";
 import { Colors } from "../styles/colors";
 
