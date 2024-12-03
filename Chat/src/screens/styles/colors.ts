@@ -1,6 +1,8 @@
 const common = {
     teal:"#219B9D",
-   light_teal:"#8ff1f2"
+   light_teal:"#8ff1f2",
+   gray:"#565E70",
+   light_gray:'#B7B7B7'
 }
 export const Colors = {
     dark:{

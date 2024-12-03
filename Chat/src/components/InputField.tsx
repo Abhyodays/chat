@@ -1,5 +1,5 @@
 import { useRef, useState } from "react"
-import { StyleSheet, Text } from "react-native";
+import { StyleProp, StyleSheet, Text, TextInputProps } from "react-native";
 import { View } from "react-native"
 import { TextInput } from "react-native-gesture-handler";
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -9,15 +9,13 @@ import { Colors } from "../screens/styles/colors";
 
 type InputFieldProp = {
     icon?: string,
-    placeholder?: string
-    setValue: (v: string) => void,
-    value: string
+    placeholder?: string,
+    onChangeText?: (text: string) => void,
+    value: string,
+    secureTextEntry?: boolean,
 }
 
-const InputField = ({ icon, placeholder, value, setValue }: InputFieldProp) => {
-    const handleChangeText = (text: string) => {
-        setValue(text)
-    }
+const InputField = ({ icon, placeholder, value, onChangeText, secureTextEntry }: InputFieldProp) => {
     const inputRef = useRef<TextInput>(null);
     const handleIconPress = () => {
         inputRef.current?.focus();
@@ -27,12 +25,13 @@ const InputField = ({ icon, placeholder, value, setValue }: InputFieldProp) => {
             {icon && <Icon name={icon} style={styles.icon} onPress={handleIconPress} />}
             <TextInput
                 value={value}
-                onChangeText={handleChangeText}
+                onChangeText={onChangeText}
                 placeholder={placeholder}
                 style={styles.input}
                 underlineColorAndroid="transparent"
                 selectionColor={Colors.dark.background}
                 ref={inputRef}
+                secureTextEntry={secureTextEntry}
             />
         </View>
     )

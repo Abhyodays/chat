@@ -1,8 +1,11 @@
+import AuthProvider from "./context/authContext";
 import Router from "./router/Router";
 
 const App = () => {
     return (
-        <Router />
+        <AuthProvider>
+            <Router />
+        </AuthProvider>
     )
 }
 

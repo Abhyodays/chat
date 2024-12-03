@@ -1,0 +1,5 @@
+const LOAD_STATE = "LAOD_STATE";
+const LOGIN = "LOGIN";
+const LOGOUT = "LOGOUT";
+
+export {LOAD_STATE, LOGIN, LOGOUT}
