@@ -1,5 +1,5 @@
 import axios from 'axios'
 export const client = axios.create({
-    baseURL: process.env.BASE_URI,
-    timeout:2000
+    baseURL: "https://chat-server-zgn7.onrender.com/api/v1",
+    timeout:10000
 })

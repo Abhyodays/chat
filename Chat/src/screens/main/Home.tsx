@@ -7,10 +7,11 @@ import { StackNavigationProp } from "@react-navigation/stack"
 import { MainStackParamList } from "../../router/MainStack"
 import { normalize, normalizeVertical } from "../../utils/responsiveSizing"
 import SearchField from "../../components/SearchField"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import UserCard from "../../components/UserCard"
 import { User } from "../../types/User"
 import { client } from "../../axios/axiosClient"
+import { socket } from "../../socket/socket"
 const Home = () => {
     const { state: auth } = useAuth();
     const navigation = useNavigation<StackNavigationProp<MainStackParamList>>();
@@ -29,6 +30,15 @@ const Home = () => {
     const goToMessages = (user: User) => {
         navigation.navigate('Messages', { user })
     }
+    useEffect(() => {
+        console.log('connecting')
+        socket.connect();
+        socket.emit('register', { email: auth.user?.email })
+        return (() => {
+            socket.disconnect();
+            console.log("socket disconnected")
+        })
+    }, [])
     return (
         <View style={[CommonStyles.container]}>
             <TouchableOpacity onPress={() => navigation.navigate('Account')} activeOpacity={0.8}>

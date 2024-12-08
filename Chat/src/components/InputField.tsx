@@ -32,6 +32,7 @@ const InputField = ({ icon, placeholder, value, onChangeText, secureTextEntry }:
                 selectionColor={Colors.dark.background}
                 ref={inputRef}
                 secureTextEntry={secureTextEntry}
+                placeholderTextColor={Colors.dark.light_gray}
             />
         </View>
     )
@@ -43,12 +44,13 @@ const styles = StyleSheet.create({
         maxWidth: normalize(350),
         alignItems: 'center',
         backgroundColor: '#3f3f3f',
-        height: normalizeVertical(80),
-        borderRadius: normalize(40),
+        height: normalizeVertical(70),
+        borderRadius: normalize(35),
         paddingHorizontal: 20
     },
     icon: {
-        fontSize: normalizeVertical(25)
+        fontSize: normalizeVertical(25),
+        color: Colors.dark.light_gray
     },
     input: {
         fontSize: normalizeVertical(20),

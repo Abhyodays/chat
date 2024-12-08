@@ -6,31 +6,12 @@ import CommonStyle from '../styles/common'
 import { normalize, normalizeVertical } from "../../utils/responsiveSizing";
 import { StyledText } from "../../styledComponents/Text";
 import GradientButton from "../../components/GradientButton";
-import { io, Socket } from "socket.io-client";
-import { useEffect, useState } from "react";
 import { Colors } from "../styles/colors";
+import { useEffect } from "react";
+import { client } from "../../axios/axiosClient";
 
 
 const Welcome = () => {
-
-    const [conn, setConn] = useState<any>(null);
-
-    useEffect(() => {
-        try {
-            const socket = io('http://10.175.0.244:3000/', {
-
-            });
-
-            socket.connect();
-
-            socket.emit('init room', "{ roomId: 'test' }")
-            setConn(socket);
-        } catch (e) {
-            console.log(e)
-        }
-    }, []);
-
-
     const navigation = useNavigation<StackNavigationProp<AuthStackParamList>>();
     const theme = useTheme();
 
