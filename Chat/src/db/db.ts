@@ -92,4 +92,4 @@ const resetTable = async(db:SQLiteDatabase)=>{
     `DELETE FROM Messages;`;
     await db.executeSql(query);
 }
-export {connectToDatabase,createTables, addMessage, getAllMessages, resetTable, getAllMessagesOfUser, updateChatUse}
+export {connectToDatabase,createTables, addMessage, getAllMessages, resetTable, getAllMessagesOfUser, updateChatUser}
