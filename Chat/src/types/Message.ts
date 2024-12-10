@@ -3,5 +3,5 @@ type Message = {
     receiver:string,
     message:string,
     created_at:string,
-    id?:number
+    id:string
 }

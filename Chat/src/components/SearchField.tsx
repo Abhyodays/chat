@@ -48,11 +48,12 @@ const styles = StyleSheet.create({
         width: 50,
         backgroundColor: Colors.dark.light_gray,
         height: 50,
-        borderRadius: 10
+        borderRadius: 10,
     },
     input: {
         fontSize: 18,
-        color: Colors.dark.text.primary
+        color: Colors.dark.text.primary,
+        flex: 1
     }
 })
 export default SearchField;

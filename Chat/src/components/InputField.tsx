@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
         color: '#fff',
         marginHorizontal: 10,
         marginRight: 20,
-        minWidth: normalize(240)
+        minWidth: normalize(240),
+        backgroundColor: 'red'
     }
 })
 
