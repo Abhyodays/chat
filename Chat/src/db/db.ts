@@ -62,7 +62,7 @@ const updateChatUser = async(db:SQLiteDatabase, chatUser:ChatUser ) =>{
 
 const getAllChatUsers = async(db:SQLiteDatabase, author:string)=>{
     const query = `
-    SELECT * FROM chat_users WHERE author = ? ORDER BY latest_message_time ASC;
+    SELECT * FROM chat_users WHERE author = ? ORDER BY latest_message_time DESC;
     `
     const chatUsers:ChatUser[] = [];
     try {

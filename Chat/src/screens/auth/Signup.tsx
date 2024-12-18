@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { StyleSheet, TouchableOpacity, View } from "react-native"
+import { Alert, StyleSheet, TouchableOpacity, View } from "react-native"
 import { AuthStackParamList } from "../../router/AuthStack";
 import { normalizeVertical } from "../../utils/responsiveSizing";
 import { Colors } from "../styles/colors";
@@ -42,7 +42,8 @@ const Signup = () => {
         try {
             const { email, fullname, password, username } = data;
             const res = await registerUser(email, password, username, fullname);
-            signup(dispatch, res);
+            Alert.alert("Signup", "User registered successfully")
+            goBack();
         } catch (error) {
             console.log("Error :: Signup : ", error)
         }

@@ -1,5 +1,5 @@
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-import { Button, Dimensions, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { StyleSheet, TouchableOpacity, View } from "react-native"
 import { MainStackParamList } from "../../router/MainStack";
 import { useAuth } from "../../context/authContext";
 import CommonStyle from "../styles/common";
@@ -13,7 +13,6 @@ import { useEffect, useRef, useState } from "react";
 import { addMessage, connectToDatabase, getAllMessagesOfUser, updateChatUser } from "../../db/db";
 import { v4 as uuid } from 'uuid';
 import TextMessage from "../../components/TextMessage";
-import { useSocket } from "../../context/SocketContext";
 import { socket } from "../../socket/socket";
 
 const Messages = () => {
