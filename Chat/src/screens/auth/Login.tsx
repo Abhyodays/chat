@@ -14,8 +14,6 @@ import { z } from "zod";
 import { loginSchema } from "../../zod/schemas/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { loginUser } from "../../services/auth.service";
-import { useEffect } from "react";
-import { client } from "../../axios/axiosClient";
 import { useAuth } from "../../context/authContext";
 import { login } from '../../context/actions/auth.action'
 
@@ -25,7 +23,6 @@ const Login = () => {
     const goBack = () => {
         navigation.goBack();
     }
-    console.log("authState:", state.isLoggedIn)
     const handleCreateAccount = () => {
         navigation.navigate('Signup')
     }

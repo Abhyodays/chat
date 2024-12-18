@@ -1,15 +1,15 @@
-import { View, TextInput, StyleSheet, TouchableOpacity } from "react-native"
+import { View, TextInput, StyleSheet, TouchableOpacity, StyleProp, Keyboard } from "react-native"
 import Icon from "react-native-vector-icons/Ionicons";
 import { Colors } from "../screens/styles/colors";
 import { normalize } from "../utils/responsiveSizing";
-import { useState } from "react";
+import { forwardRef, LegacyRef, useEffect, useRef, useState } from "react";
 
 type SearchFieldProp = {
     value: string;
     setValue: (text: string) => void;
-    onSearch: () => void
+    onSearch: () => void;
 }
-const SearchField = ({ setValue, value, onSearch }: SearchFieldProp) => {
+const SearchField = ({ setValue, value, onSearch, ...props }: SearchFieldProp, ref: LegacyRef<TextInput>) => {
 
     return (
         <View style={styles.container}>
@@ -19,6 +19,8 @@ const SearchField = ({ setValue, value, onSearch }: SearchFieldProp) => {
                 value={value}
                 onChangeText={text => setValue(text)}
                 onBlur={onSearch}
+                ref={ref}
+                {...props}
             />
             <TouchableOpacity onPress={onSearch} activeOpacity={0.8}>
                 <View style={styles.search_icon_container}>
@@ -38,9 +40,7 @@ const styles = StyleSheet.create({
         borderRadius: normalize(10),
         justifyContent: 'space-between',
         overflow: 'hidden',
-        marginLeft: normalize(10),
-        paddingLeft: 10,
-        marginTop: 20
+        paddingLeft: normalize(10),
     },
     search_icon_container: {
         justifyContent: 'center',
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
         flex: 1
     }
 })
-export default SearchField;
+export default forwardRef(SearchField);

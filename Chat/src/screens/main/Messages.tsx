@@ -2,7 +2,6 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { Button, Dimensions, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { MainStackParamList } from "../../router/MainStack";
 import { useAuth } from "../../context/authContext";
-import { ScrollView } from "react-native";
 import CommonStyle from "../styles/common";
 import StackHeader from "../../components/StackHeader";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -11,11 +10,11 @@ import { Colors } from "../styles/colors";
 import Icon from "react-native-vector-icons/Ionicons";
 import { normalize, normalizeVertical } from "../../utils/responsiveSizing";
 import { useEffect, useRef, useState } from "react";
-import { socket } from "../../socket/socket";
-import { addMessage, connectToDatabase, getAllMessages, getAllMessagesOfUser } from "../../db/db";
-import { StyledText } from "../../styledComponents/Text";
+import { addMessage, connectToDatabase, getAllMessagesOfUser, updateChatUser } from "../../db/db";
 import { v4 as uuid } from 'uuid';
 import TextMessage from "../../components/TextMessage";
+import { useSocket } from "../../context/SocketContext";
+import { socket } from "../../socket/socket";
 
 const Messages = () => {
     const route = useRoute<RouteProp<MainStackParamList, "Messages">>()
@@ -23,11 +22,10 @@ const Messages = () => {
     const [text, setText] = useState("")
     const receiver = route.params.user
     const { state: auth } = useAuth();
+    const authorEmail: string = auth.user?.email!
     const [messages, setMessages] = useState<Message[]>([]);
     const messageListRef = useRef<FlatList>(null);
     const [isFABVisible, setIsFABVisible] = useState<boolean>(false);
-
-
 
     // send message, update input field, scroll to initial state,  emit event with data
     const handleSend = async () => {
@@ -37,14 +35,14 @@ const Messages = () => {
             sender: auth.user?.email!,
             receiver: receiver.email,
             created_at: new Date().toISOString(),
-            message: text
+            message: text,
+            author: authorEmail
         }
         setMessages(pm => [data, ...pm])
         try {
-            const db = await connectToDatabase();
-            await addMessage(db, data)
+            await updateDatabase(data);
         } catch (error) {
-            console.log("Error :: addMessage :: ", error)
+            console.log("Error :: update database :: ", error)
         }
         setText('');
         goToEnd();
@@ -53,13 +51,36 @@ const Messages = () => {
     const handleChange = (text: string) => {
         setText(text);
     }
+    const updateDatabase = async (data: Message) => {
+        try {
+            const db = await connectToDatabase();
+            let chatUser = data.receiver
+            if (data.sender !== auth.user?.email) {
+                chatUser = data.sender
+            }
+            await updateChatUser(db,
+                {
+                    id: chatUser,
+                    latestMessage: data.message,
+                    latestMessageTime: data.created_at,
+                    author: authorEmail
+                })
+            await addMessage(db, data);
+        } catch (error) {
+            throw error;
+        }
+    }
 
     // socket events for receiving messages and error
     useEffect(() => {
         const handleMessageReceived = async (data: Message) => {
             setMessages((prevMessages) => [data, ...prevMessages]);
-            const db = await connectToDatabase();
-            await addMessage(db, data);
+            // try {
+            //     await updateDatabase({ ...data, author: auth.user?.email! });
+            // } catch (error) {
+            //     console.log("Error :: handleMessageReceived ::", error)
+            //     throw error;
+            // }
         };
 
         const handleError = (data: { message: string }) => {
@@ -79,7 +100,7 @@ const Messages = () => {
     useEffect(() => {
         const loadData = async () => {
             const db = await connectToDatabase();
-            const res = await getAllMessagesOfUser(db, auth.user?.email!);
+            const res = await getAllMessagesOfUser(db, auth.user?.email!, receiver.email);
             setMessages(res);
         }
         loadData();

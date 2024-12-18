@@ -1,5 +1,6 @@
 export type ChatUser = {
     id:string,
     latestMessage?:string,
-    latestMessageTime?:string
+    latestMessageTime?:string,
+    author:string
 }

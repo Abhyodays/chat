@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, ViewStyle } from "react-native"
 import { normalize, normalizeVertical } from "../utils/responsiveSizing"
-import Icon from 'react-native-vector-icons/AntDesign'
+import Icon from 'react-native-vector-icons/Ionicons'
 import { StyledText } from "../styledComponents/Text"
 import { Colors } from "../screens/styles/colors"
 
@@ -14,7 +14,7 @@ type StackHeaderProp = {
 const StackHeader = ({ label, onPressBack, style }: StackHeaderProp) => {
     return (
         <View style={[styles.container, style]}>
-            <Icon name="left" style={[styles.text, styles.icon]} onPress={onPressBack} />
+            <Icon name="arrow-back" style={[styles.text, styles.icon]} onPress={onPressBack} />
             <StyledText style={[styles.text, styles.label]}>{label}</StyledText>
         </View>
     )
@@ -25,15 +25,14 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.dark.background,
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: normalize(10)
+        paddingHorizontal: normalize(10),
+        gap: normalize(15)
     },
     text: {
-        fontSize: normalizeVertical(18),
-        color: Colors.dark.text.primary
+        fontSize: normalizeVertical(24),
+        color: Colors.dark.text.primary,
     },
     label: {
-        flex: 1,
-        textAlign: 'center'
     },
     icon: {
         fontSize: normalizeVertical(24),

@@ -1,5 +1,4 @@
-import { ThemeProvider } from "@react-navigation/native";
-import { LOAD_STATE, LOGIN, LOGOUT } from "../action.types";
+import { LOAD_STATE, LOGIN, LOGOUT, SIGNUP } from "../action.types";
 import { initialState } from "../actions/auth.action";
 import { AuthState } from "../../types/AuthState";
 
@@ -10,6 +9,8 @@ const reducer = (state=initialState, action:{type:string, payload?:AuthState}) =
         case LOGIN:
             return {...state, ...action.payload}
         case LOGOUT:
+            return {...state, ...action.payload}
+        case SIGNUP:
             return {...state, ...action.payload}
         default:
             throw new Error("Invalid action")
