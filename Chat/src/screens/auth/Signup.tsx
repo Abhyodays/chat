@@ -15,7 +15,6 @@ import { z } from "zod";
 import { SignupSchema } from "../../zod/schemas/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerUser } from "../../services/auth.service";
-import { signup } from "../../context/actions/auth.action";
 
 const Signup = () => {
     const navigation = useNavigation<StackNavigationProp<AuthStackParamList>>();

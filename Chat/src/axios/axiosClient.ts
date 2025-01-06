@@ -5,7 +5,7 @@ export const client = axios.create({
 })
 
 // export const client = axios.create({
-//     baseURL: "http://10.175.1.56:3000/api/v1",
-//     timeout:10000
+//     baseURL: "http://10.0.2.2:3000/api/v1",
+//     timeout:5000
 // })
 

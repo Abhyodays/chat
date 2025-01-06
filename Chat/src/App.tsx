@@ -17,20 +17,18 @@ const App = () => {
     }, [])
 
     useEffect(() => {
-        socket.connect();
-        socket.on('connect', () => {
-            console.log("socket get connected.")
-        })
-        socket.on('disconnect', () => {
-            console.log("socket get disconnected")
-        })
-        socket.on('reconnect', () => {
-            console.log("socket get reconnected.")
-        })
+        // const handleError = (data: { message: string }) => {
+        //     console.log("socket error:", data.message);
+        // };
+        // socket.connect();
+        // socket.on('connect', () => {
+        //     console.log("socket get connected.")
+        // })
+        // socket.on("error", handleError);
         loadData();
-        return (() => {
-            socket.disconnect();
-        })
+        // return (() => {
+        //     socket.disconnect();
+        // })
     }, [])
     return (
         <SocketContextProvider>

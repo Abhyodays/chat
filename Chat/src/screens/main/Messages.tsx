@@ -81,17 +81,9 @@ const Messages = () => {
             //     throw error;
             // }
         };
-
-        const handleError = (data: { message: string }) => {
-            console.log("socket error:", data.message);
-        };
-
         socket.on("message received", handleMessageReceived);
-        socket.on("error", handleError);
-
         return () => {
             socket.off("message received", handleMessageReceived);
-            socket.off("error", handleError);
         };
     }, [socket]);
 

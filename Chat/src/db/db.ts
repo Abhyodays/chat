@@ -1,8 +1,6 @@
 import {enablePromise, openDatabase, SQLiteDatabase} from 'react-native-sqlite-storage'
 import { DB_NAME } from '../constants/db';
 import { ChatUser } from '../types/ChatUser';
-import { User } from '../types/User';
-import { getUserDetails } from '../services/user.service';
 
 enablePromise(true);
 let dbInstance:SQLiteDatabase|null = null;
