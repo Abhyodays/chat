@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         paddingVertical: 1,
-        paddingHorizontal: 4
+        paddingHorizontal: 5
     }
 })
 export default CountIcon;

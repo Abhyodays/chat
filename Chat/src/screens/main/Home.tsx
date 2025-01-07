@@ -62,10 +62,10 @@ const Home = () => {
                     await updateDatabase({ ...data, author: userEmail });
                     // to prevent duplicate api calls for user details
                     const existingUser = users.find(u => u.email === data.sender);
-                    console.log("exist User:", existingUser)
                     if (existingUser) {
                         setUsers(prevUsers => {
                             const filteredUsers = prevUsers.filter(u => u.email !== existingUser.email);
+
                             return [existingUser, ...filteredUsers];
                         });
                     } else {
