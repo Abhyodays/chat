@@ -14,11 +14,13 @@ import { ChatUser } from "../../types/ChatUser"
 import { getUserDetails, loadChatUsersDetails } from "../../services/user.service"
 import UserList from "../../components/UserList"
 import { socket } from "../../socket/socket"
+import { useNewMessageCount } from "../../context/NewMessageCount"
 const Home = () => {
     const { state: auth } = useAuth();
     const navigation = useNavigation<StackNavigationProp<MainStackParamList>>();
-    const [query, setQuery] = useState("");
-    const [users, setUsers] = useState<User[]>([])
+    const [users, setUsers] = useState<User[]>([]);
+    const { increaseCount } = useNewMessageCount();
+
     const gotoSearch = () => {
         navigation.navigate('Search');
     }
@@ -28,7 +30,9 @@ const Home = () => {
             console.log("socket disconnected")
         });
 
-    }, [])
+    }, []);
+
+    // for users on home screen in order
     const loadChatUsers = useCallback(async (email: string) => {
         try {
             const db = await connectToDatabase();
@@ -46,14 +50,19 @@ const Home = () => {
         const handleError = (data: { message: string }) => {
             console.log("socket error:", data.message);
         };
+        // On receveing messages 
         const handleMessageReceived = async (data: Message) => {
             console.log(`received to ${auth.user?.email}:`, data.message);
             const userEmail = auth.user?.email;
             try {
                 if (data.receiver === userEmail) {
+                    // new message count increase
+                    increaseCount(data.sender);
+                    // save for persistent messages
                     await updateDatabase({ ...data, author: userEmail });
                     // to prevent duplicate api calls for user details
                     const existingUser = users.find(u => u.email === data.sender);
+                    console.log("exist User:", existingUser)
                     if (existingUser) {
                         setUsers(prevUsers => {
                             const filteredUsers = prevUsers.filter(u => u.email !== existingUser.email);
@@ -82,7 +91,7 @@ const Home = () => {
             socket.disconnect();
         };
     }, [auth.user?.email]);
-
+    // 
     const updateDatabase = async (data: Message) => {
         try {
             const db = await connectToDatabase();
@@ -120,7 +129,7 @@ const Home = () => {
                 <StyledText style={[CommonStyles.text, styles.title]}>{auth.user?.fullName.split(' ').map(s => s[0].toUpperCase() + s.slice(1)).join(' ')}</StyledText>
             </TouchableOpacity>
             <TouchableOpacity onPress={gotoSearch} activeOpacity={0.8} style={styles.search}>
-                <SearchField value={query} setValue={setQuery} editable={false} />
+                <SearchField value={""} setValue={() => { }} editable={false} />
             </TouchableOpacity>
             <UserList data={users} />
 

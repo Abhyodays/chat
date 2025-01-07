@@ -4,6 +4,7 @@ import Router from "./router/Router";
 import { connectToDatabase, createTables } from "./db/db";
 import { SocketContextProvider } from "./context/SocketContext";
 import { socket } from "./socket/socket";
+import { NewMessageCountProvider } from "./context/NewMessageCount";
 
 const App = () => {
 
@@ -33,7 +34,9 @@ const App = () => {
     return (
         <SocketContextProvider>
             <AuthProvider>
-                <Router />
+                <NewMessageCountProvider>
+                    <Router />
+                </NewMessageCountProvider>
             </AuthProvider>
         </SocketContextProvider>
     )

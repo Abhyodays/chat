@@ -5,6 +5,7 @@ import { normalize, normalizeVertical } from "../utils/responsiveSizing";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { MainStackParamList } from "../router/MainStack";
+import { useNewMessageCount } from "../context/NewMessageCount";
 
 type UserListProp = {
     data: User[];
@@ -12,7 +13,9 @@ type UserListProp = {
 }
 const UserList = ({ data }: UserListProp) => {
     const navigation = useNavigation<StackNavigationProp<MainStackParamList>>();
+    const { clearCount } = useNewMessageCount();
     const goToMessages = (user: User) => {
+        clearCount(user.email);
         navigation.navigate("Messages", { user })
     }
 
